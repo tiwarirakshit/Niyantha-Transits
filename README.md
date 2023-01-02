@@ -1,1 +1,1 @@
-# niyantha-customer-app
+# niyantha-b2b-app
