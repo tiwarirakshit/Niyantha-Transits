@@ -1,6 +1,6 @@
 # niyantha-b2b-app
 
-Installing Steps
+Installation Steps
 
 Step 1 
 Clone or Pull this Repo
