@@ -1,51 +1,23 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
-
-import { StyleSheet } from 'react-native';
-
-import HomeScreen from "./screens/HomeScreen";
-import CartScreen from "./screens/CartScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import CatogeryScreen from "./screens/CatogeryScreen";
-
-const Tab = createBottomTabNavigator();
+import { useEffect, useState } from 'react';
+import { LogBox } from 'react-native';
+import Auth from './Auth';
+import { ShopContext } from './contexts/ShopContext';
+import { UserContext } from './contexts/UserContext';
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (<Ionicons name="home" color={color} />),
-          }}
-        />
-        <Tab.Screen
-          name="Catogery"
-          component={CatogeryScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (<Ionicons name="logo-windows" color={color} />),
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (<Ionicons name="person" color={color} />),
-          }}
-        />
-        <Tab.Screen
-          name="Cart"
-          component={CartScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (<Ionicons name="cart" color={color} />),
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']); // This is here to ignore this warning as it won't break anything in production and is safe to use, because sometimes Flatlist need to be in ScrollView
+  }, []);
+
+ return (
+    <UserContext.Provider value={{ isUserLoggedIn, setIsUserLoggedIn }}>
+      <ShopContext.Provider value={{ shops, setShops }}>
+        <Auth />
+      </ShopContext.Provider>
+    </UserContext.Provider>);
 }
 
-const styles = StyleSheet.create({});
