@@ -2,8 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
-import { AccountStack } from './AccountStack';
-import { CartStack } from './CartStack';
 import { CategoryStack } from './CategoryStack';
 import { HomeStack } from './HomeStack';
 
